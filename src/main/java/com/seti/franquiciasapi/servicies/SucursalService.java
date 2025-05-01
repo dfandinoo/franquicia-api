@@ -7,6 +7,8 @@ import com.seti.franquiciasapi.repository.SucursalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SucursalService {
 
@@ -23,6 +25,12 @@ public class SucursalService {
                 );
         sucursal.setFranquicia(franquicia);
         return sucursalRepository.save(sucursal);
+    }
+
+    public Sucursal getSucursalById(Long sucursalId) {
+        return sucursalRepository.findById(sucursalId).orElseThrow(
+                () -> new RuntimeException("Sucursal no encontrada")
+        );
     }
 
 }
