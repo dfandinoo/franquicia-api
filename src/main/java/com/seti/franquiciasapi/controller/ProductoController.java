@@ -1,9 +1,9 @@
 package com.seti.franquiciasapi.controller;
 
 import com.seti.franquiciasapi.dto.ProductoDto;
+import com.seti.franquiciasapi.dto.ProductoMaxStockDto;
 import com.seti.franquiciasapi.dto.ProductoStockUpdateDto;
 import com.seti.franquiciasapi.entities.Producto;
-import com.seti.franquiciasapi.entities.Sucursal;
 import com.seti.franquiciasapi.servicies.ProductoService;
 import com.seti.franquiciasapi.servicies.SucursalService;
 import com.seti.franquiciasapi.utils.FranquiciaMapper;
@@ -25,8 +25,10 @@ public class ProductoController {
     private SucursalService sucursalService;
 
     @GetMapping("/franquicia/{franquiciaId}/max-stock")
-    public List<Producto> productosConMayorStockPorSucursal(@PathVariable Long franquiciaId) {
-        return productoService.getProductosWithMaxStockBySucursalOfFranquicia(franquiciaId);
+    public ResponseEntity<List<ProductoMaxStockDto>> productosConMayorStockPorSucursal(@PathVariable Long franquiciaId) {
+        List<ProductoMaxStockDto> productoMaxStock = productoService.getProductosWithMaxStockBySucursalOfFranquicia(franquiciaId);
+        System.out.printf("ENTRO ACA");
+        return new ResponseEntity<>(productoMaxStock, HttpStatus.OK);
     }
 
     @PostMapping("/sucursal/{sucursalId}")

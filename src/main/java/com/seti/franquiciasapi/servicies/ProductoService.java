@@ -1,5 +1,6 @@
 package com.seti.franquiciasapi.servicies;
 
+import com.seti.franquiciasapi.dto.ProductoMaxStockDto;
 import com.seti.franquiciasapi.entities.Producto;
 import com.seti.franquiciasapi.entities.Sucursal;
 import com.seti.franquiciasapi.repository.ProductoRepository;
@@ -37,8 +38,8 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public List<Producto> getProductosWithMaxStockBySucursalOfFranquicia(Long franquiciaId) {
-        return null;
+    public List<ProductoMaxStockDto> getProductosWithMaxStockBySucursalOfFranquicia(Long franquiciaId) {
+        return productoRepository.findProductosConMasStockPorSucursalDeFranquicia(franquiciaId);
     }
 
 }
