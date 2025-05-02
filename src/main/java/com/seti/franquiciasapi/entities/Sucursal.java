@@ -27,6 +27,7 @@ public class Sucursal {
 
     @ManyToOne
     @JoinColumn(name = "franquicia_id")
+    @JsonBackReference
     private Franquicia franquicia;
 
     @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)

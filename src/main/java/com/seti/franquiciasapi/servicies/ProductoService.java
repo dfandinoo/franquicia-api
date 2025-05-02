@@ -1,6 +1,8 @@
 package com.seti.franquiciasapi.servicies;
 
+import com.seti.franquiciasapi.dto.NameDto;
 import com.seti.franquiciasapi.dto.ProductoMaxStockDto;
+import com.seti.franquiciasapi.entities.Franquicia;
 import com.seti.franquiciasapi.entities.Producto;
 import com.seti.franquiciasapi.entities.Sucursal;
 import com.seti.franquiciasapi.repository.ProductoRepository;
@@ -27,10 +29,6 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public void deleteProducto(Long productoId) {
-        productoRepository.deleteById(productoId);
-    }
-
     public Producto updateStock(Long productoId, int nuevoStock) {
         Producto producto = productoRepository.findById(productoId)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
@@ -40,6 +38,18 @@ public class ProductoService {
 
     public List<ProductoMaxStockDto> getProductosWithMaxStockBySucursalOfFranquicia(Long franquiciaId) {
         return productoRepository.findProductosConMasStockPorSucursalDeFranquicia(franquiciaId);
+    }
+
+    public List<Producto> getAllProductos() {
+        return (List<Producto>) productoRepository.findAll();
+    }
+
+    public Producto updateNombreProducto(Long productoId, NameDto nameDto) {
+        Producto producto = productoRepository.findById(productoId)
+                .orElseThrow( () -> new RuntimeException("Producto no encontrado")
+                );
+        producto.setNombre(nameDto.getNombre());
+        return productoRepository.save(producto);
     }
 
 }

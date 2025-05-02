@@ -1,5 +1,6 @@
 package com.seti.franquiciasapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class Franquicia {
     private String nombre;
 
     @OneToMany(mappedBy = "franquicia", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference
     @JsonManagedReference
     private List<Sucursal> sucursales = new ArrayList<>();
 
